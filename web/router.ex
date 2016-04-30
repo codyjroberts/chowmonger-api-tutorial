@@ -11,6 +11,8 @@ defmodule Chowmonger.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
+    plug JaSerializer.ContentTypeNegotiation
+    plug JaSerializer.Deserializer
   end
 
   scope "/api", Chowmonger do
