@@ -39,4 +39,5 @@ config :chowmonger, Chowmonger.Repo,
   password: "postgres",
   database: "chowmonger_dev",
   hostname: "localhost",
+  template: "template0",
   pool_size: 10
