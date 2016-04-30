@@ -10,7 +10,7 @@ defmodule Chowmonger.Router do
   end
 
   pipeline :api do
-    plug :accepts, ["json"]
+    plug :accepts, ["json-api"]
     plug JaSerializer.ContentTypeNegotiation
     plug JaSerializer.Deserializer
   end
@@ -18,8 +18,8 @@ defmodule Chowmonger.Router do
   scope "/api", Chowmonger do
     pipe_through :api
 
-    scope "/v1" do
-
+    scope "/v1", alias: API.V1 do
+      resources "users", UserController, except: [:new, :edit]
     end
   end
 end
