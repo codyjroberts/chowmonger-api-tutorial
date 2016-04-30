@@ -13,6 +13,8 @@ defmodule Chowmonger.Router do
     plug :accepts, ["json-api"]
     plug JaSerializer.ContentTypeNegotiation
     plug JaSerializer.Deserializer
+    plug Guardian.Plug.VerifyHeader, realm: "Bearer"
+    plug Guardian.Plug.LoadResource
   end
 
   scope "/api", Chowmonger do
@@ -20,8 +22,7 @@ defmodule Chowmonger.Router do
 
     scope "/v1", alias: API.V1 do
       resources "users", UserController, only: [:index, :show]
-
-      post "/token", TokenController, :create
+      post "token", TokenController, :create
     end
   end
 end

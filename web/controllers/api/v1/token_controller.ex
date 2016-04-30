@@ -1,9 +1,11 @@
 defmodule Chowmonger.API.V1.TokenController do
   use Chowmonger.Web, :controller
 
-  plug :scrub_params, "session" when action in [:create]
+  alias Chowmonger.API.V1.TokenView
 
-  def create(conn, %{ "data" => %{ "attributes" => token_params } }) do
+  plug :scrub_params, "data" when action in [:create]
+
+  def create(conn, %{"data" => %{"attributes" => token_params }}) do
     case Chowmonger.Token.authenticate(token_params) do
       {:ok, user} ->
         {:ok, jwt, _full_claims} = user |> Guardian.encode_and_sign(:token)
@@ -19,9 +21,10 @@ defmodule Chowmonger.API.V1.TokenController do
     end
   end
 
-  def unauthenticated(conn, _params) do
+  # called from Guardian.Plug.EnsureAuthenticated
+  def unauthenticated(conn, params) do
     conn
     |> put_status(:forbidden)
-    |> render(Chowmonger.TokenView, "forbidden.json", error: "Not Authenticated")
+    |> render(TokenView, "forbidden.json", error: "Not Authenticated")
   end
 end

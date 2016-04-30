@@ -38,8 +38,6 @@ config :plug, :mimes, %{
 
 # Configure Gurdian
 config :guardian, Guardian,
-  allowed_algos: ["HS512"],
-  verify_module: Guardian.JWT,
   issuer: "Chowmonger",
   ttl: { 30, :days },
   verify_issuer: true,
