@@ -19,7 +19,9 @@ defmodule Chowmonger.Router do
     pipe_through :api
 
     scope "/v1", alias: API.V1 do
-      resources "users", UserController, except: [:new, :edit]
+      resources "users", UserController, only: [:index, :show]
+
+      post "/token", TokenController, :create
     end
   end
 end

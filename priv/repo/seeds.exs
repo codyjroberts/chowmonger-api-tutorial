@@ -1,11 +1,6 @@
-# Script for populating the database. You can run it as:
-#
-#     mix run priv/repo/seeds.exs
-#
-# Inside the script, you can read and write to any of your
-# repositories directly:
-#
-#     Chowmonger.Repo.insert!(%Chowmonger.SomeModel{})
-#
-# We recommend using the bang functions (`insert!`, `update!`
-# and so on) as they will fail if something goes wrong.
+alias Chowmonger.Repo
+alias Chowmonger.API.V1.User
+
+admin = %{ name: "Admin", email: "admin@truckn.com", password: "password" }
+
+User.changeset(%User{}, admin) |> Repo.insert!
