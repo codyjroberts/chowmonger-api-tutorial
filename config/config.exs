@@ -35,3 +35,13 @@ config :phoenix, :format_encoders,
 config :plug, :mimes, %{
   "application/vnd.api+json" => ["json-api"]
 }
+
+# Configure Gurdian
+config :guardian, Guardian,
+  allowed_algos: ["HS512"],
+  verify_module: Guardian.JWT,
+  issuer: "Chowmonger",
+  ttl: { 30, :days },
+  verify_issuer: true,
+  secret_key: to_string(Mix.env),
+  serializer: Chowmonger.GuardianSerializer
