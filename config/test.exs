@@ -16,4 +16,6 @@ config :chowmonger, Chowmonger.Repo,
   password: "postgres",
   database: "chowmonger_test",
   hostname: "localhost",
+  template: "template0",
+  port: 5433,
   pool: Ecto.Adapters.SQL.Sandbox
