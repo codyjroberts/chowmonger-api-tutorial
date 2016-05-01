@@ -6,6 +6,7 @@ defmodule Chowmonger.API.V1.User do
     field :email, :string
     field :password, :string
     field :password_hash, :string
+    has_one :truck, Chowmonger.API.V1.Truck
 
     timestamps
   end

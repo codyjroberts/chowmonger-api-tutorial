@@ -22,6 +22,7 @@ defmodule Chowmonger.Router do
 
     scope "/v1", alias: API.V1 do
       resources "users", UserController, only: [:index, :show]
+      resources "trucks", TruckController, only: [:index, :show, :update]
       post "token", TokenController, :create
     end
   end
