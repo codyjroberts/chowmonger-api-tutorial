@@ -35,5 +35,6 @@ defmodule Chowmonger.Endpoint do
     key: "_chowmonger_key",
     signing_salt: "dabQbB6M"
 
+  plug CORSPlug
   plug Chowmonger.Router
 end
