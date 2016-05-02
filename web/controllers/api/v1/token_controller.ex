@@ -27,4 +27,10 @@ defmodule Chowmonger.API.V1.TokenController do
     |> put_status(:forbidden)
     |> render(TokenView, "forbidden.json", error: "Not Authenticated")
   end
+
+  def unauthorized(conn, params) do
+    conn
+    |> put_status(:forbidden)
+    |> render(TokenView, "forbidden.json", error: "Not Authorized")
+  end
 end

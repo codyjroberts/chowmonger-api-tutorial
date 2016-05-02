@@ -25,6 +25,7 @@ defmodule Chowmonger.API.V1.TruckController do
 
     case Repo.update(changeset) do
       {:ok, truck} ->
+        Chowmonger.Endpoint.broadcast_from! self(), "trucks", "change", %{"id" => id}
         render(conn, "show.json", data: truck)
       {:error, changeset} ->
         conn
